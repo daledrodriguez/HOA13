@@ -1,11 +1,11 @@
-#This is the main.yml file for installing Message Queue
-
-- name: Install Message Queue (Ubuntu)
+- name: Install Message Queue
   apt:
-    name:
-      - rabbitmq-server
-    state: latest
+    name: rabbitmq-server
+    state: present
+    update_cache: yes
 
-- name: Editing Permission
-  shell:
-    rabbitmqctl set_permissions openstack ".*" ".*" ".*"
+- name: Starting service
+  service:
+    name: rabbitmq-server.service
+    state: started
+    enabled: true
